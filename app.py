@@ -1,5 +1,8 @@
-from flask import Flask, Response
+import os
 import cv2
+
+from flask import Flask, Response
+
 app = Flask(__name__)
 video = cv2.VideoCapture(0)
 @app.route('/')
