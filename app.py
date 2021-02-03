@@ -6,7 +6,7 @@ import io
 from base64 import b64decode, b64encode
 from IPython.display import display, Javascript
 #from google.colab.output import eval_js
-from js2py
+from js2py import eval_js
 
 from flask import Flask, Response
 
