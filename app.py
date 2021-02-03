@@ -1,5 +1,7 @@
 import os
 import cv2
+import PIL
+import io
 
 from flask import Flask, Response
 
