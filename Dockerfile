@@ -4,6 +4,6 @@ WORKDIR /app
 
 COPY . ./
 
-RUN pip install flask gunicorn CurrencyConverter opencv-python
+RUN pip install flask gunicorn CurrencyConverter opencv-python opencv
 
 CMD gunicorn --bind :$PORT app:app
