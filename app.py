@@ -2,6 +2,7 @@ import os
 import cv2
 import PIL
 import io
+import numpy as np
 
 from base64 import b64decode, b64encode
 from IPython.display import display, Javascript
