@@ -4,6 +4,6 @@ WORKDIR /app
 
 COPY . ./
 
-RUN pip install flask gunicorn CurrencyConverter opencv-python-headless Pillow pybase64 ipython
+RUN pip install flask gunicorn CurrencyConverter opencv-python-headless Pillow pybase64 ipython js2py
 
 CMD gunicorn --bind :$PORT app:app
