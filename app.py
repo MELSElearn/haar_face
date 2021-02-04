@@ -9,7 +9,7 @@ from IPython.display import display, Javascript
 #from google.colab.output import eval_js
 from js2py import eval_js
 
-from flask import Flask, Response
+from flask import Flask, render_template, Response
 
 app = Flask(__name__)
 
