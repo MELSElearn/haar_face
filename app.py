@@ -171,6 +171,10 @@ def bbox_to_bytes(bbox_array):
 @app.route('/', methods=['POST', 'GET'])
 def index():
     return render_template('index.html')
+  
+@app.route('/video_feed')
+def video_feed():
+   return video_stream()  
 
 @socketio.on('catch-frame')
 def catch_frame(data):
