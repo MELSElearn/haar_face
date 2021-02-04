@@ -33,8 +33,8 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.7.3/socket.io.min.js"></script>
   <script>
-    var socket = io.connect('http://' + document.domain + ':5000');
-    alert('http://' + document.domain + ':5000')
+    var socket = io.connect('https://' + document.domain + ':5000');
+    alert('https://' + document.domain + ':5000')
     // checking for connection
     socket.on('connect', function(){
       console.log("Connected... ", socket.connected)
