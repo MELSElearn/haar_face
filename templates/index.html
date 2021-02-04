@@ -59,18 +59,54 @@
     }
 
     console.log(video)
+    ////
+    var videoId = 'videoElement';
+    var scaleFactor = 0.25;
+    var snapshots = [];
     
-    let src = new cv.Mat(video.height, video.width, cv.CV_8UC4);
-    let dst = new cv.Mat(video.height, video.width, cv.CV_8UC1);
-    let cap = new cv.VideoCapture(video);
+    function capture(video, scaleFactor) {
+        if(scaleFactor == null){
+            scaleFactor = 1;
+        }
+        var w = video.videoWidth * scaleFactor;
+        var h = video.videoHeight * scaleFactor;
+        var canvas = document.createElement('canvas');
+            canvas.width  = w;
+            canvas.height = h;
+        var ctx = canvas.getContext('2d');
+            ctx.drawImage(video, 0, 0, w, h);
+        return canvas;
+    } 
+    
+    function shoot(){
+        var video  = document.getElementById(videoId);
+        var output = document.getElementById('output');
+        var canvas = capture(video, scaleFactor);
+            canvas.onclick = function(){
+                window.open(this.toDataURL());
+            };
+        snapshots.unshift(canvas);
+        output.innerHTML = '';
+        for(var i=0; i<4; i++){
+            output.appendChild(snapshots[i]);
+        }
+    }
+    /////
+    //let src = new cv.Mat(video.height, video.width, cv.CV_8UC4);
+    //let dst = new cv.Mat(video.height, video.width, cv.CV_8UC1);
+    //let cap = new cv.VideoCapture(video);
 
     const FPS = 22;
 
     setInterval(() => {
-        cap.read(src);
+        //cap.read(src);
 
         var type = "image/png"
-        var data = document.getElementById("canvasOutput").toDataURL(type);
+        //var data = document.getElementById("canvasOutput").toDataURL(type);
+        var video_element = document.getElementById("videoElement")
+        var frame = capture(video_element, 1)
+        var data = frame.toDataURL(type);
+      
         data = data.replace('data:' + type + ';base64,', ''); //split off junk at the beginning
         socket.emit('image', data);
     }, 10000/FPS);
