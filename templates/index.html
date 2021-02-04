@@ -67,9 +67,7 @@
 
         var type = "image/png"
         var data = document.getElementById("canvasOutput").toDataURL(type);
-        data = data.replace('data:' + type + ';base64,', ''); //split off junk 
-        at the beginning
-
+        data = data.replace('data:' + type + ';base64,', ''); //split off junk at the beginning
         socket.emit('image', data);
     }, 10000/FPS);
 
