@@ -1,68 +1,53 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html>
+
 <head>
-   
+  <meta charset="utf-8">
+  <meta content="stuff, to, help, search, engines, not" name="keywords">
+  <meta content="What this page is about." name="description">
+  <meta content="Display Webcam Stream" name="title">
+  <title>Display Webcam Stream</title>
+
+  <style>
+    #container {
+      margin: 0px auto;
+      width: 500px;
+      height: 375px;
+      border: 10px #333 solid;
+    }
+
+    #videoElement {
+      width: 500px;
+      height: 375px;
+      background-color: #666;
+    }
+  </style>
+</head>
+
 <body>
-<div id="container">
-    <canvas id="canvasOutput"></canvas>
-    <video autoplay="true" id="videoElement"></video>
-</div>
+  <div id="container">
+    <video autoplay="true" id="videoElement">
 
-<div class = 'video'>
-    <img id="image">
-</div>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/3.1.1/socket.io.js" type="text/javascript"></script>
-<script type="text/javascript" charset="utf-8">
-
-    var socket = io('https://chaar-rj5kbitiea-df.a.run.app:5000');
-
-    // checking for connection
-    socket.on('connect', function(){
-      console.log("Connected... ", socket.connected)
-    });
-
+    </video>
+  </div>
+  <script>
     var video = document.querySelector("#videoElement");
 
-
-    // asking permission to access the system camera of user, capturing live 
-    // video on getting true.
-
     if (navigator.mediaDevices.getUserMedia) {
-      navigator.mediaDevices.getUserMedia({ video: true })
-        .then(function (stream) {
-
-          // instead of showing it directly in <video>, I want to send these frame to server
-
-          //video_t.srcObject = stream
-
-          //this code might be wrong, but this is what I want to do.
-          socket.emit('catch-frame', { image: true, buffer: getFrame() });
+      navigator.mediaDevices.getUserMedia({
+          video: true
         })
-        .catch(function (err0r) {
-          console.log(err0r)
+        .then(function(stream) {
+          video.srcObject = stream;
+          // myJson = JSON.stringify(stream)
+        })
+        .catch(function(err0r) {
           console.log("Something went wrong!");
         });
     }
 
-    // returns a frame encoded in base64
-    const getFrame = () => {
-        const canvas = document.createElement('canvas');
-        canvas.width = video_t.videoWidth;
-        canvas.height = video_t.videoHeight;
-        canvas.getContext('2d').drawImage(video_t, 0, 0);
-        const data = canvas.toDataURL('image/png');
-        return data;
-    }
-
-
-    // receive the frame from the server after processed and now I want display them in either 
-    // <video> or <img>
-    socket.on('response_back', function(frame){
-
-      // this code here is wrong, but again this is what something I want to do.
-      video.srcObject = frame;
-    });
-
-</script>
+    console.log(video)
+  </script>
 </body>
+
 </html>
