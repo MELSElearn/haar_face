@@ -31,4 +31,4 @@ def catch_frame(data):
 
 
 if __name__ == '__main__':
-    socketio.run(app, host='chaar-rj5kbitiea-df.a.run.app')
+    socketio.run(app)
